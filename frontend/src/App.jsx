@@ -1,6 +1,8 @@
 import React from 'react'
 import { Routes, Route } from 'react-router-dom'
 import LandingPage from './pages/LandingPage'
+import LoginPage from './pages/LoginPage'
+import SignupPage from './pages/SignupPage'
 import UserProvider from './context/UserContext'
 import Dashboard from './pages/Dashboard'
 import EditResume from './components/EditResume'
@@ -11,6 +13,8 @@ const App = () => {
     <UserProvider>
       <Routes>
         <Route path="/" element={<LandingPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/signup" element={<SignupPage />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path='/resume/:resumeId' element={<EditResume />} />
       </Routes>

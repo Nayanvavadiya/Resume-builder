@@ -4,21 +4,16 @@ import { landingPageStyles } from '../assets/dummystyle'
 import { UserContext } from '../context/UserContext'
 import { useNavigate } from 'react-router-dom'
 import { ProfileInfoCard } from '../components/Cards'
-import Modal from '../components/Modal'
-import Login from '../components/Login'
-import SignUp from '../components/SignUp'
 
 const LandingPage = () => {
   const { user } = useContext(UserContext)
   const navigate = useNavigate()
 
-  const [openAuthmodal, setOpenAuthmodal] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const [currentPage, setCurrentPage] = useState('login')
 
   const handleCTA = () => {
     if (!user) {
-      setOpenAuthmodal(true)
+      navigate('/login')
     } else {
       navigate('/dashboard')
     }
@@ -45,7 +40,7 @@ const LandingPage = () => {
             {user ? (
               <ProfileInfoCard />
             ) : (
-              <button className={landingPageStyles.desktopAuthButton} onClick={() => setOpenAuthmodal(true)}>
+              <button className={landingPageStyles.desktopAuthButton} onClick={() => navigate('/login')}>
                 Get Started
               </button>
             )}
@@ -67,7 +62,7 @@ const LandingPage = () => {
                   Dashboard
                 </button>
               ) : (
-                <button className={landingPageStyles.mobileAuthButton} onClick={() => { setOpenAuthmodal(true); setMobileMenuOpen(false) }}>
+                <button className={landingPageStyles.mobileAuthButton} onClick={() => { navigate('/login'); setMobileMenuOpen(false) }}>
                   Get Started
                 </button>
               )}
@@ -228,12 +223,6 @@ const LandingPage = () => {
         </div>
       </footer>
 
-      <Modal isOpen={openAuthmodal} onClose={() => { setOpenAuthmodal(false); setCurrentPage('login') }} hideHeader>
-        <div>
-          {currentPage === 'login' && <Login setCurrentPage={setCurrentPage} />}
-          {currentPage === 'signup' && <SignUp setCurrentPage={setCurrentPage} />}
-        </div>
-      </Modal>
     </div>
   )
 }
