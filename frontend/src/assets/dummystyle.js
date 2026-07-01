@@ -1,121 +1,147 @@
 export const landingPageStyles = {
   // Main container
-  container: "min-h-screen bg-gradient-to-br from-slate-50 via-white to-violet-50",
+  container: "min-h-screen bg-[#0a110a] font-sans text-slate-300 overflow-x-hidden",
 
   // Header styles
-  header: "fixed top-0 w-full z-50 bg-white/70 backdrop-blur-xl border-b border-violet-100/50",
+  header: "fixed top-0 w-full z-50 bg-[#0a110a]/80 backdrop-blur-xl border-b border-white/5",
   headerContainer: "max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center",
   logoContainer: "flex items-center gap-3",
-  logoIcon: "w-10 h-10 bg-gradient-to-br from-violet-600 to-fuchsia-600 rounded-2xl flex items-center justify-center shadow-lg shadow-violet-200",
-  logoIconInner: "w-5 h-5 text-white",
-  logoText: "text-xl sm:text-2xl font-black bg-gradient-to-r from-violet-600 to-fuchsia-600 bg-clip-text text-transparent",
-  mobileMenuButton: "md:hidden p-2 rounded-xl hover:bg-violet-50 transition-colors",
-  mobileMenuIcon: "text-violet-600",
+  logoIcon: "w-8 h-8 bg-green-400 rounded flex items-center justify-center",
+  logoIconInner: "w-5 h-5 text-[#0a110a]",
+  logoText: "text-xl sm:text-2xl font-bold text-white tracking-wide uppercase",
+  mobileMenuButton: "md:hidden p-2 rounded-xl hover:bg-white/5 transition-colors",
+  mobileMenuIcon: "text-white",
 
   // Auth buttons
-  desktopAuthButton: "relative group px-6 sm:px-8 py-2 sm:py-3 bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white font-bold rounded-2xl overflow-hidden transition-all hover:scale-105 hover:shadow-xl hover:shadow-violet-200",
-  desktopAuthButtonText: "relative",
-  desktopAuthButtonOverlay: "absolute inset-0 bg-gradient-to-r from-fuchsia-600 to-violet-600 opacity-0 group-hover:opacity-100 transition-opacity",
-  mobileAuthButton: "w-full px-6 py-3 bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white font-bold rounded-2xl",
+  desktopAuthButton: "px-6 py-2 bg-gradient-to-r from-green-400 to-yellow-300 text-black font-semibold rounded hover:opacity-90 transition-opacity",
+  desktopAuthButtonText: "",
+  desktopAuthButtonOverlay: "",
+  mobileAuthButton: "w-full px-6 py-3 bg-gradient-to-r from-green-400 to-yellow-300 text-black font-semibold rounded",
 
   // Mobile menu
-  // Mobile menu
-  // Mobile menu
-  mobileMenu: "md:hidden bg-white/95 backdrop-blur-lg w-full fixed top-16 left-0 right-0 z-40 shadow-lg border-b border-violet-100/50 transition-all duration-300 ease-in-out",
+  mobileMenu: "md:hidden bg-[#0a110a]/95 backdrop-blur-lg w-full fixed top-16 left-0 right-0 z-40 shadow-lg border-b border-white/10 transition-all duration-300 ease-in-out",
   mobileMenuContainer: "max-w-6xl mx-auto px-4 sm:px-6 py-4 flex flex-col gap-4",
   mobileUserInfo: "flex flex-col gap-4 py-2",
-  mobileUserWelcome: "text-violet-700 font-medium text-center py-2 text-base sm:text-lg",
-  mobileDashboardButton: "w-full px-6 py-3 bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white font-bold rounded-xl hover:shadow-lg hover:shadow-violet-200/50 transition-all",
-  mobileAuthButton: "w-full px-6 py-3 bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white font-bold rounded-xl hover:shadow-lg hover:shadow-violet-200/50 transition-all",
+  mobileUserWelcome: "text-white font-medium text-center py-2 text-base sm:text-lg",
+  mobileDashboardButton: "w-full px-6 py-3 bg-gradient-to-r from-green-400 to-yellow-300 text-black font-bold rounded",
+
   // Main content
   main: "pt-24",
 
   // Hero section
-  heroSection: "max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20",
-  heroGrid: "flex flex-wrap justify-between gap-10 lg:gap-12 items-center",
-  heroLeft: "space-y-8",
-  tagline: "inline-flex items-center gap-2 sm:gap-3 px-4 py-2 bg-gradient-to-r from-violet-100 to-fuchsia-100 border border-violet-200 text-violet-700 rounded-full font-bold text-xs sm:text-sm",
-  heading: "text-4xl sm:text-6xl lg:text-8xl font-black leading-tight",
-  headingText: "block text-slate-900",
-  headingGradient: "block bg-gradient-to-r from-violet-600 via-fuchsia-600 to-orange-500 bg-clip-text text-transparent",
-  description: "text-base sm:text-lg lg:text-xl text-slate-600 leading-relaxed max-w-lg font-medium",
-  ctaButtons: "flex flex-col sm:flex-row gap-4",
+  heroSection: "max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24",
+  heroGrid: "flex flex-col lg:flex-row justify-between gap-12 items-center",
+  heroLeft: "space-y-6 flex-1",
+  tagline: "",
+  heading: "",
+  headingText: "",
+  headingGradient: "",
+  description: "",
+  heroBadge: "inline-flex items-center gap-2 px-3 py-1 rounded-full border border-green-400/30 text-green-400 font-semibold text-[10px] tracking-widest uppercase",
+  heroTitle: "text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-white leading-[1.1]",
+  heroTitleAccent: "text-green-400",
+  heroDescription: "text-lg text-slate-400 max-w-lg leading-relaxed",
 
-  // Buttons
-  primaryButton: "group relative px-10 py-4 bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white font-bold rounded-2xl overflow-hidden transition-all hover:scale-105 hover:shadow-2xl hover:shadow-violet-200",
-  primaryButtonOverlay: "absolute inset-0 bg-gradient-to-r from-fuchsia-600 to-orange-500 opacity-0 group-hover:opacity-100 transition-opacity",
-  primaryButtonContent: "relative flex items-center gap-2 sm:gap-3",
-  primaryButtonIcon: "group-hover:translate-x-1 transition-transform",
-  secondaryButton: "px-8 sm:px-10 py-3 sm:py-4 border-2 border-violet-200 text-violet-700 font-bold rounded-2xl hover:border-violet-300 hover:bg-violet-50 transition-all",
+  ctaButtons: "flex flex-col sm:flex-row gap-4 pt-2",
+  primaryButton: "flex items-center justify-center gap-2 px-8 py-3 bg-gradient-to-r from-green-400 to-yellow-300 text-black font-semibold rounded hover:opacity-90 transition-opacity",
+  primaryButtonOverlay: "",
+  primaryButtonContent: "",
+  primaryButtonIcon: "",
+  secondaryButton: "px-8 py-3 border border-white/20 text-white font-semibold rounded hover:bg-white/5 transition-colors",
 
-  // Stats
-  statsContainer: "flex flex-wrap sm:flex-nowrap items-center gap-6 sm:gap-8 pt-6",
-  statItem: "text-center",
-  statNumber: "text-2xl sm:text-3xl lg:text-4xl font-black bg-gradient-to-r bg-clip-text text-transparent",
-  statLabel: "text-xs sm:text-sm text-slate-500 font-medium",
+  statsContainer: "flex flex-wrap items-center gap-8 pt-8 mt-8",
+  statItem: "text-left",
+  statNumber: "",
+  statValue: "text-3xl font-bold text-white",
+  statLabel: "text-xs text-slate-500 font-semibold tracking-wider uppercase mt-1",
 
-  // Hero illustration
-  heroIllustration: "relative w-full max-w-sm sm:max-w-md lg:max-w-lg mx-auto",
-  heroIllustrationBg: "absolute -inset-8 bg-gradient-to-r from-violet-200/50 to-fuchsia-200/50 rounded-3xl blur-3xl",
-  heroIllustrationContainer: "relative",
+  heroIllustration: "",
+  heroIllustrationBg: "",
+  heroIllustrationContainer: "",
+  svgContainer: "",
+  svgRect: "",
+  svgCircle: "",
+  svgRectPrimary: "",
+  svgRectSecondary: "",
+  svgRectLight: "",
+  svgRectSkill: "",
+  svgAnimatedCircle: "",
+  svgAnimatedRect: "",
+  svgAnimatedPolygon: "",
 
-  // SVG styles
-  svgContainer: "w-full h-auto max-w-md mx-auto",
-  svgRect: "fill-[url(#cardGradient)] stroke-[#e2e8f0] stroke-[2]",
-  svgCircle: "fill-[url(#bgGradient)]",
-  svgRectPrimary: "fill-[#8b5cf6]",
-  svgRectSecondary: "fill-[#d946ef]",
-  svgRectLight: "fill-[#e2e8f0]",
-  svgRectSkill: "fill-[#ddd6fe]",
-  svgAnimatedCircle: "fill-[#f97316] opacity-80",
-  svgAnimatedRect: "fill-[#10b981] opacity-80",
-  svgAnimatedPolygon: "fill-[#ef4444] opacity-80",
+  // Hero Preview Card
+  heroPreviewCard: "relative w-full max-w-lg bg-[#111811] border border-white/5 rounded-2xl p-8 shadow-2xl flex-1",
+  previewTopBar: "flex items-center gap-2 mb-8",
+  previewDot: "w-16 h-2 rounded-full bg-slate-700/50",
+  previewHeader: "flex items-center gap-4 mb-8",
+  previewAvatar: "w-12 h-12 rounded bg-[#dcfce7] text-[#166534] flex items-center justify-center text-lg font-bold",
+  previewName: "h-3 w-32 rounded-full bg-slate-600 mb-2",
+  previewRole: "h-2 w-20 rounded-full bg-slate-700",
+  previewContent: "space-y-4 mb-8",
+  previewLine: "h-2 rounded-full bg-slate-700/50",
+  previewLineLong: "w-full",
+  previewLineMedium: "w-4/5",
+  previewLineShort: "w-1/2",
+  skillChips: "flex flex-wrap gap-2 mb-8",
+  skillChip: "px-3 py-1 rounded-full border border-white/10 text-slate-400 text-xs font-medium",
+  previewFooter: "inline-flex items-center gap-2 rounded-lg bg-white/5 text-slate-300 px-4 py-2 text-xs font-medium border border-white/10",
 
   // Features section
-  featuresSection: "bg-gradient-to-br from-violet-50 to-fuchsia-50 py-16 sm:py-24",
+  featuresSection: "py-24 bg-[#0a110a]",
   featuresContainer: "max-w-6xl mx-auto px-4 sm:px-6 lg:px-8",
-  featuresHeader: "text-center mb-12 sm:mb-20",
-  featuresTitle: "text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 mb-4 sm:mb-6",
-  featuresTitleGradient: "bg-gradient-to-r from-violet-600 to-fuchsia-600 bg-clip-text text-transparent",
-  featuresDescription: "text-base sm:text-lg text-slate-600 max-w-2xl mx-auto font-medium",
-  featuresGrid: "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8",
+  featuresHeader: "mb-16",
+  sectionIntro: "text-4xl sm:text-5xl font-bold text-white mb-2",
+  featuresTitle: "text-4xl sm:text-5xl font-bold text-green-400 mb-6",
+  featuresDescription: "text-slate-400",
+  featuresGrid: "grid grid-cols-1 md:grid-cols-3 gap-6",
 
   // Feature cards
-  featureCard: "group relative",
-  featureCardHover: "absolute -inset-2 bg-gradient-to-r opacity-0 group-hover:opacity-100 transition-opacity blur-xl rounded-3xl from-violet-200 to-fuchsia-200",
-  featureCardContent: "relative bg-gradient-to-br border border-white/50 p-6 sm:p-8 rounded-3xl hover:shadow-2xl transition-all group-hover:scale-105",
-  featureIconContainer: "w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-br rounded-2xl flex items-center justify-center mb-4 sm:mb-6 text-white shadow-lg",
-  featureIcon: "w-8 h-8 sm:w-10 sm:h-10",
-  featureTitle: "text-xl sm:text-2xl font-black text-slate-900 mb-2 sm:mb-4",
-  featureDescription: "text-sm sm:text-base text-slate-600 leading-relaxed font-medium",
+  featureCard: "relative group bg-[#0e1610] border border-white/5 rounded-xl p-8 hover:border-white/10 transition-colors",
+  featureCardGlow: "hidden",
+  featureCardContent: "relative z-10",
+  featureIconContainer: "w-12 h-12 bg-gradient-to-br from-green-400 to-yellow-300 rounded flex items-center justify-center text-black mb-6",
+  featureIconWrapper: "w-12 h-12 bg-gradient-to-br from-green-400 to-yellow-300 rounded flex items-center justify-center text-black mb-6",
+  featureIcon: "w-6 h-6",
+  featureTitle: "text-xl font-bold text-white mb-3",
+  featureDescription: "text-sm text-slate-400 leading-relaxed",
+  featureCardViolet: "",
+  featureCardFuchsia: "",
+  featureCardOrange: "",
+  featureIconViolet: "",
+  featureIconFuchsia: "",
+  featureIconOrange: "",
 
-  // Feature gradients
-  featureCardViolet: "from-violet-50 to-purple-50",
-  featureCardFuchsia: "from-fuchsia-50 to-pink-50",
-  featureCardOrange: "from-orange-50 to-red-50",
-  featureIconViolet: "from-violet-500 to-purple-600",
-  featureIconFuchsia: "from-fuchsia-500 to-pink-600",
-  featureIconOrange: "from-orange-500 to-red-600",
+  // Testimonial Section
+  testimonialSection: "py-24",
+  testimonialCard: "max-w-4xl mx-auto text-left px-4",
+  testimonialRating: "flex items-center gap-4 mb-8",
+  testimonialRatingBadge: "flex items-center gap-1 text-yellow-400 text-xl",
+  testimonialRatingText: "text-sm text-slate-400",
+  testimonialQuote: "text-2xl sm:text-3xl lg:text-4xl font-medium leading-relaxed text-white",
 
-  // CTA section
-  ctaSection: "py-16 sm:py-24",
-  ctaContainer: "max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center",
-  ctaCard: "relative",
-  ctaCardBg: "absolute -inset-6 sm:-inset-8 bg-gradient-to-r from-violet-200/50 to-fuchsia-200/50 rounded-3xl blur-3xl",
-  ctaCardContent: "relative bg-gradient-to-br from-white to-violet-50 border border-violet-100 rounded-3xl p-8 sm:p-16",
-  ctaTitle: "text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 mb-4 sm:mb-6",
-  ctaTitleGradient: "bg-gradient-to-r from-violet-600 to-fuchsia-600 bg-clip-text text-transparent",
-  ctaDescription: "text-base sm:text-lg text-slate-600 mb-6 sm:mb-10 max-w-2xl mx-auto font-medium",
-  ctaButton: "group relative px-8 sm:px-12 py-3 sm:py-5 bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white font-black text-lg rounded-2xl overflow-hidden transition-all hover:scale-105 hover:shadow-2xl hover:shadow-violet-200",
-  ctaButtonOverlay: "absolute inset-0 bg-gradient-to-r from-fuchsia-600 to-orange-500 opacity-0 group-hover:opacity-100 transition-opacity",
-  ctaButtonText: "relative",
+  // CTA Section
+  ctaSection: "py-24 px-4",
+  ctaContainer: "max-w-4xl mx-auto relative",
+  ctaCard: "relative bg-gradient-to-b from-[#111f15] to-[#0a110a] border border-white/10 rounded-2xl p-12 text-center overflow-hidden",
+  ctaCardBg: "absolute top-0 left-1/2 -translate-x-1/2 w-full h-1/2 bg-green-500/20 blur-[100px]",
+  ctaContent: "relative z-10 flex flex-col items-center gap-8",
+  ctaTitle: "text-4xl sm:text-5xl font-bold text-white",
+  ctaTitleGradient: "",
+  ctaDescription: "text-slate-400",
+  ctaButton: "px-8 py-4 bg-gradient-to-r from-green-400 to-yellow-300 text-black font-semibold rounded hover:opacity-90 transition-opacity",
+  ctaButtonOverlay: "",
+  ctaButtonText: "",
 
   // Footer
-  footer: "border-t border-violet-100 bg-gradient-to-r from-violet-50 to-fuchsia-50 py-6 sm:py-8",
-  footerContainer: "max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center",
-  footerText: "text-sm sm:text-base text-slate-500 font-medium",
-  footerHeart: "bg-gradient-to-r from-red-500 to-pink-500 bg-clip-text text-transparent",
-  footerLink: "hover:text-purple-400 underline"
+  footer: "py-8",
+  footerContainer: "max-w-6xl mx-auto px-4 text-center",
+  footerText: "text-sm text-slate-500",
+  footerHeart: "",
+  footerLink: "",
+
+  navLinks: "hidden md:flex items-center gap-8",
+  navLink: "text-sm font-medium text-slate-400 hover:text-white transition-colors",
+  headerActions: "hidden md:flex items-center",
 };
 
 export const dashboardStyles = {
@@ -132,35 +158,35 @@ export const dashboardStyles = {
   createButtonOverlay: "absolute inset-0 bg-gradient-to-r from-fuchsia-600 to-orange-500 opacity-0 group-hover:opacity-100 transition-opacity",
   createButtonContent: "relative flex items-center gap-3",
 
-    // Loading
-    spinnerWrapper: "flex justify-center items-center py-12",
-    spinner: "animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-violet-600",
+  // Loading
+  spinnerWrapper: "flex justify-center items-center py-12",
+  spinner: "animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-violet-600",
 
-    // Empty State
-    emptyStateWrapper: "flex flex-col items-center justify-center py-12 text-center",
-    emptyIconWrapper: "bg-violet-100 p-4 rounded-full mb-4",
-    emptyTitle: "text-xl font-bold text-gray-900 mb-2",
-    emptyText: "text-gray-600 max-w-md mb-6",
+  // Empty State
+  emptyStateWrapper: "flex flex-col items-center justify-center py-12 text-center",
+  emptyIconWrapper: "bg-violet-100 p-4 rounded-full mb-4",
+  emptyTitle: "text-xl font-bold text-gray-900 mb-2",
+  emptyText: "text-gray-600 max-w-md mb-6",
 
-    // Grid
-    grid: "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6",
+  // Grid
+  grid: "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6",
 
-    // New Resume Card
-    newResumeCard: "flex flex-col items-center justify-center bg-gradient-to-br from-violet-50 to-blue-50 border-2 border-dashed border-violet-300 rounded-2xl p-6 cursor-pointer transition-all hover:shadow-lg hover:border-violet-500 h-full",
-    newResumeIcon: "w-16 h-16 rounded-full bg-gradient-to-r from-violet-600 to-fuchsia-600 flex items-center justify-center mb-4",
-    newResumeTitle: "text-xl font-bold text-gray-900 mb-2 text-center",
-    newResumeText: "text-gray-600 text-center",
+  // New Resume Card
+  newResumeCard: "flex flex-col items-center justify-center bg-gradient-to-br from-violet-50 to-blue-50 border-2 border-dashed border-violet-300 rounded-2xl p-6 cursor-pointer transition-all hover:shadow-lg hover:border-violet-500 h-full",
+  newResumeIcon: "w-16 h-16 rounded-full bg-gradient-to-r from-violet-600 to-fuchsia-600 flex items-center justify-center mb-4",
+  newResumeTitle: "text-xl font-bold text-gray-900 mb-2 text-center",
+  newResumeText: "text-gray-600 text-center",
 
-    // Modal
-    modalHeader: "flex justify-between items-center mb-4",
-    modalTitle: "text-xl font-bold text-gray-900",
-    modalCloseButton: "text-gray-500 hover:text-gray-700",
+  // Modal
+  modalHeader: "flex justify-between items-center mb-4",
+  modalTitle: "text-xl font-bold text-gray-900",
+  modalCloseButton: "text-gray-500 hover:text-gray-700",
 
-    // Delete Confirmation
-    deleteIconWrapper: "bg-red-100 p-3 rounded-full mb-4",
-    deleteTitle: "text-lg font-bold text-gray-900 mb-2",
-    deleteText: "text-gray-600 mb-4",
-  };
+  // Delete Confirmation
+  deleteIconWrapper: "bg-red-100 p-3 rounded-full mb-4",
+  deleteTitle: "text-lg font-bold text-gray-900 mb-2",
+  deleteText: "text-gray-600 mb-4",
+};
 
 
 export const cardStyles = {

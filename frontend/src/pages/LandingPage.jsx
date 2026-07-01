@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react'
-import { ArrowRight, Lamp, LayoutTemplate, Menu, X, Zap, Download } from 'lucide-react'
-import { buttonStyles, landingPageStyles } from '../assets/dummystyle'
+import { ArrowRight, LayoutTemplate, Menu, X, Zap, Download, ShieldCheck, Star } from 'lucide-react'
+import { landingPageStyles } from '../assets/dummystyle'
 import { UserContext } from '../context/UserContext'
 import { useNavigate } from 'react-router-dom'
 import { ProfileInfoCard } from '../components/Cards'
@@ -8,296 +8,213 @@ import Modal from '../components/Modal'
 import Login from '../components/Login'
 import SignUp from '../components/SignUp'
 
-
-
 const LandingPage = () => {
   const { user } = useContext(UserContext)
   const navigate = useNavigate()
 
   const [openAuthmodal, setOpenAuthmodal] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const [currentPage, setCurrentPage] = useState("login")
+  const [currentPage, setCurrentPage] = useState('login')
 
   const handleCTA = () => {
     if (!user) {
       setOpenAuthmodal(true)
-    }
-    else {
+    } else {
       navigate('/dashboard')
     }
   }
 
-
   return (
     <div className={landingPageStyles.container}>
-      {/* header */}
       <header className={landingPageStyles.header}>
         <div className={landingPageStyles.headerContainer}>
           <div className={landingPageStyles.logoContainer}>
             <div className={landingPageStyles.logoIcon}>
               <LayoutTemplate className={landingPageStyles.logoIconInner} />
             </div>
-            <span className={landingPageStyles.logoText}>
-              ProResume
-            </span>
+            <span className={landingPageStyles.logoText}>Resumint</span>
           </div>
 
-          {/* Mobile menu button */}
-          <button className={landingPageStyles.mobileMenuButton}
-            onClick={() => {
-              setMobileMenuOpen(!mobileMenuOpen)
-            }}>
-            {mobileMenuOpen ?
-              <X size={24} className={landingPageStyles.mobileMenuIcon} /> :
-              <Menu size={24} className={landingPageStyles.mobileMenuIcon} />}
-          </button>
+          <nav className={landingPageStyles.navLinks}>
+            <a href="#features" className={landingPageStyles.navLink}>Features</a>
+            <a href="#templates" className={landingPageStyles.navLink}>Templates</a>
+            <a href="#pricing" className={landingPageStyles.navLink}>Pricing</a>
+          </nav>
 
-          {/* Desktop Navigation*/}
-          <div className='hidden md:flex items-center'>
+          <div className={landingPageStyles.headerActions}>
             {user ? (
               <ProfileInfoCard />
             ) : (
-              <button
-                className={landingPageStyles.desktopAuthButton}
-                onClick={() => setOpenAuthmodal(true)}>
-                <div className={landingPageStyles.desktopAuthButtonOverlay}></div>
-                <span className={landingPageStyles.desktopAuthButtonText}>
-                  Get started
-                </span>
+              <button className={landingPageStyles.desktopAuthButton} onClick={() => setOpenAuthmodal(true)}>
+                Get Started
               </button>
             )}
           </div>
+
+          <button className={landingPageStyles.mobileMenuButton} onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+            {mobileMenuOpen ? <X size={24} className={landingPageStyles.mobileMenuIcon} /> : <Menu size={24} className={landingPageStyles.mobileMenuIcon} />}
+          </button>
         </div>
 
-        {/* Mobile menu  */}
         {mobileMenuOpen && (
           <div className={landingPageStyles.mobileMenu}>
             <div className={landingPageStyles.mobileMenuContainer}>
+              <a href="#features" className={landingPageStyles.mobileMenuLink} onClick={() => setMobileMenuOpen(false)}>Features</a>
+              <a href="#templates" className={landingPageStyles.mobileMenuLink} onClick={() => setMobileMenuOpen(false)}>Templates</a>
+              <a href="#pricing" className={landingPageStyles.mobileMenuLink} onClick={() => setMobileMenuOpen(false)}>Pricing</a>
               {user ? (
-                <div className={landingPageStyles.mobileUserInfo}>
-                  <div className={landingPageStyles.mobileUserWelcome}>
-                    Welcome Back
-                  </div>
-                  <button className={landingPageStyles.mobileDashboardButton}
-                    onClick={() => {
-                      navigate('/dashboard');
-                      setMobileMenuOpen(false)
-                    }}>
-                    GO to Dashboard
-                  </button>
-                </div>
+                <button className={landingPageStyles.mobileDashboardButton} onClick={() => { navigate('/dashboard'); setMobileMenuOpen(false) }}>
+                  Dashboard
+                </button>
               ) : (
-                <button className={landingPageStyles.mobileAuthButton}
-                  onClick={() => {
-                    setOpenAuthmodal(true)
-                    setMobileMenuOpen(false)
-                  }}>
-                  Get started
+                <button className={landingPageStyles.mobileAuthButton} onClick={() => { setOpenAuthmodal(true); setMobileMenuOpen(false) }}>
+                  Get Started
                 </button>
               )}
             </div>
           </div>
         )}
       </header>
-      {/* Main Content */}
+
       <main className={landingPageStyles.main}>
         <section className={landingPageStyles.heroSection}>
           <div className={landingPageStyles.heroGrid}>
-            {/* Left Content */}
             <div className={landingPageStyles.heroLeft}>
-              <div className={landingPageStyles.tagline}>
-                Professional Resume Builder
-              </div>
-
-              <h1 className={landingPageStyles.heading}>
-                <span className={landingPageStyles.head}>Craft</span>
-                <span className={landingPageStyles.headingGradient}>Professional</span>
-                <span className={landingPageStyles.headingText}>make</span>
-                <span className={landingPageStyles.headingText}>Resumes</span>
+              <div className={landingPageStyles.heroBadge}>Resume Builder</div>
+              <h1 className={landingPageStyles.heroTitle}>
+                Resumes that <span className={landingPageStyles.heroTitleAccent}>get you hired.</span>
               </h1>
-
-              <p className={landingPageStyles.description}>
-                Create job-winning resumes with expertly designed templates.
-                ATS-friendly, recruiter-approved, and tailored to your career goals.
+              <p className={landingPageStyles.heroDescription}>
+                Design a standout resume with expertly crafted, ATS-optimized templates — tailored to your career and ready in minutes.
               </p>
 
               <div className={landingPageStyles.ctaButtons}>
-                <button className={landingPageStyles.primaryButton}
-                  onClick={handleCTA}>
-                  <div className={landingPageStyles.primaryButtonOverlay}>
-                  </div>
-                  <span className={landingPageStyles.primaryButtonContent}>
-                    Start Building
-                    <ArrowRight className={landingPageStyles.primaryButtonIcon} size={18} />
-                  </span>
+                <button className={landingPageStyles.primaryButton} onClick={handleCTA}>
+                  Start Building
+                  <ArrowRight size={18} />
                 </button>
-
                 <button className={landingPageStyles.secondaryButton} onClick={handleCTA}>
-                  view Templates
+                  View Templates
                 </button>
               </div>
 
-
-              {/* Stats Grid */}
               <div className={landingPageStyles.statsContainer}>
                 {[
-                  { value: '50K+', label: 'Resumes Created', gradient: 'from-violet-600 to-fuchsia-600' },
-                  { value: '4.9★', label: 'User Rating', gradient: 'from-orange-500 to-red-500' },
-                  { value: '5 Min', label: 'Build Time', gradient: 'from-emerald-500 to-teal-500' }
-                ].map((stat, idx) => (
-                  <div className={landingPageStyles.statItem} key={idx}>
-                    <div className={`${landingPageStyles.statNumber} ${stat.gradient}`}>
-                      {stat.value}
-                    </div>
+                  { value: '50K+', label: 'Resumes built' },
+                  { value: '4.9', label: 'Avg rating' },
+                  { value: '5 min', label: 'to finish' }
+                ].map((stat, index) => (
+                  <div key={index} className={landingPageStyles.statItem}>
+                    <div className={landingPageStyles.statValue}>{stat.value}</div>
                     <div className={landingPageStyles.statLabel}>{stat.label}</div>
                   </div>
                 ))}
               </div>
             </div>
 
-            {/* RIght Side  */}
-            <div className={landingPageStyles.heroIllustration}>
-              <div className={landingPageStyles.heroIllustrationBg}></div>
-              <div className={landingPageStyles.heroIllustrationContainer}>
-                <svg
-                  viewBox="0 0 400 500"
-                  className={landingPageStyles.svgContainer}
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  {/* Background */}
-                  <defs>
-                    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%" stopColor="#8b5cf6" />
-                      <stop offset="100%" stopColor="#d946ef" />
-                    </linearGradient>
-                    <linearGradient id="cardGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%" stopColor="#ffffff" />
-                      <stop offset="100%" stopColor="#f8fafc" />
-                    </linearGradient>
-                  </defs>
+            <div className={landingPageStyles.heroPreviewCard}>
+              <div className={landingPageStyles.previewTopBar}>
+                <span className={landingPageStyles.previewDot}></span>
+                <span className={landingPageStyles.previewDot}></span>
+                <span className={landingPageStyles.previewDot}></span>
+              </div>
 
-                  {/* SVG elements */}
-                  <rect x="50" y="50" width="300" height="400" rx="20" className={landingPageStyles.svgRect} />
-                  <circle cx="120" cy="120" r="25" className={landingPageStyles.svgCircle} />
-                  <rect x="160" y="105" width="120" height="8" rx="4" className={landingPageStyles.svgRectPrimary} />
-                  <rect x="160" y="120" width="80" height="6" rx="3" className={landingPageStyles.svgRectSecondary} />
-                  <rect x="70" y="170" width="260" height="4" rx="2" className={landingPageStyles.svgRectLight} />
-                  <rect x="70" y="185" width="200" height="4" rx="2" className={landingPageStyles.svgRectLight} />
-                  <rect x="70" y="200" width="240" height="4" rx="2" className={landingPageStyles.svgRectLight} />
-                  <rect x="70" y="230" width="60" height="6" rx="3" className={landingPageStyles.svgRectPrimary} />
-                  <rect x="70" y="250" width="40" height="15" rx="7" className={landingPageStyles.svgRectSkill} />
-                  <rect x="120" y="250" width="50" height="15" rx="7" className={landingPageStyles.svgRectSkill} />
-                  <rect x="180" y="250" width="45" height="15" rx="7" className={landingPageStyles.svgRectSkill} />
-                  <rect x="70" y="290" width="80" height="6" rx="3" className={landingPageStyles.svgRectSecondary} />
-                  <rect x="70" y="310" width="180" height="4" rx="2" className={landingPageStyles.svgRectLight} />
-                  <rect x="70" y="325" width="150" height="4" rx="2" className={landingPageStyles.svgRectLight} />
-                  <rect x="70" y="340" width="200" height="4" rx="2" className={landingPageStyles.svgRectLight} />
+              <div className={landingPageStyles.previewHeader}>
+                <div className={landingPageStyles.previewAvatar}>AK</div>
+                <div>
+                  <div className={landingPageStyles.previewName}>Alex Kim</div>
+                  <div className={landingPageStyles.previewRole}>Product Designer</div>
+                </div>
+              </div>
 
-                  {/* Animated elements */}
-                  <circle cx="320" cy="100" r="15" className={landingPageStyles.svgAnimatedCircle}>
-                    <animateTransform
-                      attributeName="transform"
-                      type="translate"
-                      values="0,0; 0,-10; 0,0"
-                      dur="3s"
-                      repeatCount="indefinite"
-                    />
-                  </circle>
-                  <rect x="30" y="300" width="12" height="12" rx="6" className={landingPageStyles.svgAnimatedRect}>
-                    <animateTransform
-                      attributeName="transform"
-                      type="translate"
-                      values="0,0; 5,0; 0,0"
-                      dur="2s"
-                      repeatCount="indefinite"
-                    />
-                  </rect>
-                  <polygon points="360,200 370,220 350,220" className={landingPageStyles.svgAnimatedPolygon}>
-                    <animateTransform
-                      attributeName="transform"
-                      type="rotate"
-                      values="0 360 210; 360 360 210; 0 360 210"
-                      dur="4s"
-                      repeatCount="indefinite"
-                    />
-                  </polygon>
-                </svg>
+              <div className={landingPageStyles.previewContent}>
+                <div className={`${landingPageStyles.previewLine} ${landingPageStyles.previewLineLong}`} />
+                <div className={`${landingPageStyles.previewLine} ${landingPageStyles.previewLineMedium}`} />
+                <div className={`${landingPageStyles.previewLine} ${landingPageStyles.previewLineShort}`} />
+              </div>
+
+              <div className={landingPageStyles.skillChips}>
+                {['React', 'Node', 'Figma', 'SQL'].map((skill) => (
+                  <span key={skill} className={landingPageStyles.skillChip}>{skill}</span>
+                ))}
+              </div>
+
+              <div className={landingPageStyles.previewFooter}>
+                <ShieldCheck size={16} />
+                <span>ATS Approved</span>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Features section */}
-        <section className={landingPageStyles.featuresSection}>
+        <section id="features" className={landingPageStyles.featuresSection}>
           <div className={landingPageStyles.featuresContainer}>
             <div className={landingPageStyles.featuresHeader}>
-              <h2 className={landingPageStyles.featuresTitle}>
-                Why choose <span className={landingPageStyles.featuresTitleGradient}>
-                  ProResume?
-                </span>
-              </h2>
-              <p className={landingPageStyles.featureDescription}>
-                Everything you need to create a professional resume that stands out
-              </p>
+              <h2 className={landingPageStyles.sectionIntro}>Built to make you <br/><span className={landingPageStyles.featuresTitle}>unmissable.</span></h2>
+              <p className={landingPageStyles.featuresDescription}>Everything you need to create a resume that stands out from the stack.</p>
             </div>
 
             <div className={landingPageStyles.featuresGrid}>
               {[
                 {
                   icon: <Zap className={landingPageStyles.featureIcon} />,
-                  title: "Lightning Fast",
-                  description: "Create professional resumes in under 5 minutes with our streamlined process",
-                  gradient: landingPageStyles.featureIconViolet,
-                  bg: landingPageStyles.featureCardViolet
+                  title: 'Lightning Fast',
+                  description: 'Build a polished, professional resume in under five minutes with our guided flow.',
+                  style: landingPageStyles.featureCardViolet
                 },
                 {
                   icon: <LayoutTemplate className={landingPageStyles.featureIcon} />,
-                  title: "Pro Templates",
-                  description: "Choose from dozens of recruiter-approved, industry-specific templates",
-                  gradient: landingPageStyles.featureIconFuchsia,
-                  bg: landingPageStyles.featureCardFuchsia
+                  title: 'Pro Templates',
+                  description: 'Recruiter-approved, ATS-friendly layouts crafted for every industry and role.',
+                  style: landingPageStyles.featureCardFuchsia
                 },
                 {
                   icon: <Download className={landingPageStyles.featureIcon} />,
-                  title: "Instant Export",
-                  description: "Download high-quality PDFs instantly with perfect formatting",
-                  gradient: landingPageStyles.featureIconOrange,
-                  bg: landingPageStyles.featureCardOrange
+                  title: 'Instant Export',
+                  description: 'Download pixel-perfect PDFs instantly — formatting stays flawless everywhere.',
+                  style: landingPageStyles.featureCardOrange
                 }
               ].map((feature, index) => (
                 <div key={index} className={landingPageStyles.featureCard}>
-                  <div className={landingPageStyles.featureCardHover}></div>
-                  <div className={`${landingPageStyles.featureCardContent} ${feature.bg}`}>
-                    <div className={`${landingPageStyles.featureIconContainer} ${feature.gradient}`}>
-                      {feature.icon}
-                    </div>
-                    <h3 className={landingPageStyles.featureTitle}>
-                      {feature.title}
-                    </h3>
+                  <div className={`${landingPageStyles.featureCardGlow} ${feature.style}`} />
+                  <div className={landingPageStyles.featureCardContent}>
+                    <div className={landingPageStyles.featureIconWrapper}>{feature.icon}</div>
+                    <h3 className={landingPageStyles.featureTitle}>{feature.title}</h3>
                     <p className={landingPageStyles.featureDescription}>{feature.description}</p>
                   </div>
                 </div>
               ))}
             </div>
-
           </div>
         </section>
 
-        {/* CTA section */}
-        <section className={landingPageStyles.ctaSection}>
+        <section className={landingPageStyles.testimonialSection}>
+          <div className={landingPageStyles.testimonialCard}>
+            <div className={landingPageStyles.testimonialRating}>
+              <div className={landingPageStyles.testimonialRatingBadge}>
+                {[1, 2, 3, 4, 5].map(star => (
+                  <Star key={star} className="fill-yellow-400 text-yellow-400 w-5 h-5" />
+                ))}
+              </div>
+              <span className={landingPageStyles.testimonialRatingText}>Loved by 50,000+ professionals worldwide</span>
+            </div>
+            <p className={landingPageStyles.testimonialQuote}>
+              "I rebuilt my resume in one evening and had three interviews the next week. <span className="text-green-400">This is the tool I wish I had years ago.</span>"
+            </p>
+          </div>
+        </section>
+
+        <section id="pricing" className={landingPageStyles.ctaSection}>
           <div className={landingPageStyles.ctaContainer}>
             <div className={landingPageStyles.ctaCard}>
               <div className={landingPageStyles.ctaCardBg}></div>
-              <div className={landingPageStyles.ctaCardContent}>
-                <h2 className={landingPageStyles.ctaTitle}>
-                  Ready to build your <span className={landingPageStyles.ctaTitleGradient}>Standout Resume</span>
-                </h2>
-                <p className={landingPageStyles.ctaDescription}>
-                  Join thousands of professionals who landed their dream job with our platform
-                </p>
+              <div className={landingPageStyles.ctaContent}>
+                <div>
+                  <h2 className={landingPageStyles.ctaTitle}>Your next role starts <span className="text-green-400">here.</span></h2>
+                  <p className={landingPageStyles.ctaDescription}>Join thousands of professionals who landed their dream job with Resumint.</p>
+                </div>
                 <button className={landingPageStyles.ctaButton} onClick={handleCTA}>
-                  <div className={landingPageStyles.ctaButtonOverlay}></div>
-                  <span className={landingPageStyles.ctaButtonText}>Start Building Now</span>
+                  Build Your Resume
                 </button>
               </div>
             </div>
@@ -305,27 +222,16 @@ const LandingPage = () => {
         </section>
       </main>
 
-      {/* Footer Section  */}
       <footer className={landingPageStyles.footer}>
         <div className={landingPageStyles.footerContainer}>
-          <p className={landingPageStyles.footerText}>
-            Crafted with <span className={landingPageStyles.footerHeart}>❤️</span> by{' '}
-            <a href="" target='_blank' className={landingPageStyles.footerLink}>
-              Nayan
-            </a>
-          </p>
+          <p className={landingPageStyles.footerText}>© 2026 Resumint — Crafted for careers that matter.</p>
         </div>
       </footer>
 
-      {/* Modal For Login and Signup */}
-      <Modal isOpen={openAuthmodal} onClose={() => {
-        setOpenAuthmodal(false)
-        setCurrentPage("login")
-      }} hideHeader>
-
+      <Modal isOpen={openAuthmodal} onClose={() => { setOpenAuthmodal(false); setCurrentPage('login') }} hideHeader>
         <div>
-          {currentPage === "login" && <Login setCurrentPage={setCurrentPage} />}
-          {currentPage === "signup" && <SignUp setCurrentPage={setCurrentPage} />}
+          {currentPage === 'login' && <Login setCurrentPage={setCurrentPage} />}
+          {currentPage === 'signup' && <SignUp setCurrentPage={setCurrentPage} />}
         </div>
       </Modal>
     </div>
