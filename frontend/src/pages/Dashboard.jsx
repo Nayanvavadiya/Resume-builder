@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useContext, useEffect, useMemo, useState } from 'react'
 import DashboardLayout from '../components/DashboardLayout'
 import { dashboardStyles as styles } from '../assets/dummystyle'
-import { useNavigate } from 'react-router-dom'
-import { LucideFilePlus, LucideTrash2 } from 'lucide-react'
+import { Link, useNavigate } from 'react-router-dom'
+import { UserContext } from '../context/UserContext'
+import { Clock3, Download, FilePlus2, FileText, Plus, Trash2 } from 'lucide-react'
 import axiosInstance from '../utils/axiosInstance'
 import { API_PATHS } from '../utils/apiPaths'
 import { ResumeSummaryCard } from '../components/Cards'
@@ -15,30 +16,27 @@ import moment from 'moment'
 const Dashboard = () => {
 
     const navigate = useNavigate();
+    const { user } = useContext(UserContext);
     const [openCreateModal, setOpencreateModal] = useState(false)
     const [allResumes, setAllResumes] = useState([]);
     const [loading, setLoading] = useState(true)
     const [resumeToDelete, setResumeToDelete] = useState(null);
     const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+    const displayName = user?.name?.split(' ')[0] || 'Alex';
 
-
-    // Calculate completion percentage for a resume
-    const calculateCompletion = (resume) => {
+    const calculateCompletion = useCallback((resume) => {
         let completedFields = 0;
         let totalFields = 0;
 
-        // Profile Info
         totalFields += 3;
         if (resume.profileInfo?.fullName) completedFields++;
         if (resume.profileInfo?.designation) completedFields++;
         if (resume.profileInfo?.summary) completedFields++;
 
-        // Contact Info
         totalFields += 2;
         if (resume.contactInfo?.email) completedFields++;
         if (resume.contactInfo?.phone) completedFields++;
 
-        // Work Experience
         resume.workExperience?.forEach(exp => {
             totalFields += 5;
             if (exp.company) completedFields++;
@@ -48,7 +46,6 @@ const Dashboard = () => {
             if (exp.description) completedFields++;
         });
 
-        // Education
         resume.education?.forEach(edu => {
             totalFields += 4;
             if (edu.degree) completedFields++;
@@ -57,14 +54,12 @@ const Dashboard = () => {
             if (edu.endDate) completedFields++;
         });
 
-        // Skills
         resume.skills?.forEach(skill => {
             totalFields += 2;
             if (skill.name) completedFields++;
             if (skill.progress > 0) completedFields++;
         });
 
-        // Projects
         resume.projects?.forEach(project => {
             totalFields += 4;
             if (project.title) completedFields++;
@@ -73,7 +68,6 @@ const Dashboard = () => {
             if (project.liveDemo) completedFields++;
         });
 
-        // Certifications
         resume.certifications?.forEach(cert => {
             totalFields += 3;
             if (cert.title) completedFields++;
@@ -81,26 +75,22 @@ const Dashboard = () => {
             if (cert.year) completedFields++;
         });
 
-        // Languages
         resume.languages?.forEach(lang => {
             totalFields += 2;
             if (lang.name) completedFields++;
             if (lang.progress > 0) completedFields++;
         });
 
-        // Interests
         totalFields += (resume.interests?.length || 0);
-        completedFields += (resume.interests?.filter(i => i?.trim() !== "")?.length || 0);
+        completedFields += (resume.interests?.filter(i => i?.trim() !== '')?.length || 0);
 
-        return Math.round((completedFields / totalFields) * 100);
-    };
-    //It will show if completed or Filled it will do ++.
+        return totalFields ? Math.round((completedFields / totalFields) * 100) : 0;
+    }, []);
 
-    const fetchAllResumes = async () => {
+    const fetchAllResumes = useCallback(async () => {
         try {
             setLoading(true)
             const response = await axiosInstance.get(API_PATHS.RESUME.GET_ALL)
-            //Add completion percentage to each resumes
             const resumeWithCompletion = response.data.map(resume => ({
                 ...resume,
                 completion: calculateCompletion(resume)
@@ -114,24 +104,34 @@ const Dashboard = () => {
         finally {
             setLoading(false)
         }
-    }
+    }, [calculateCompletion])
 
     useEffect(() => {
         fetchAllResumes();
-    }, []);
+    }, [fetchAllResumes]);
+
+    const lastEdited = useMemo(() => {
+        if (!allResumes.length) return '-'
+
+        const latest = allResumes
+            .map(resume => resume.updatedAt || resume.createdAt)
+            .filter(Boolean)
+            .sort((a, b) => new Date(b) - new Date(a))[0]
+
+        return latest ? moment(latest).format('MMM D, YYYY') : '-'
+    }, [allResumes])
 
     const handleDeleteresume = async () => {
-        if(!resumeToDelete) return;
+        if (!resumeToDelete) return;
 
         try {
             await axiosInstance.delete(API_PATHS.RESUME.DELETE(resumeToDelete))
             toast.success('Resume deleted successfully')
             fetchAllResumes()
         }
-        
         catch (error) {
-            console.error('Error deleting rersume:',error)
-            toast.error('failed to delete resume')
+            console.error('Error deleting resume:', error)
+            toast.error('Failed to delete resume')
         }
         finally {
             setResumeToDelete(null)
@@ -144,95 +144,110 @@ const Dashboard = () => {
         setShowDeleteConfirm(true);
     }
 
+    const statCards = [
+        { icon: <FileText size={27} />, value: allResumes.length, label: 'Resumes' },
+        { icon: <Download size={27} />, value: 0, label: 'Downloads' },
+        { icon: <Clock3 size={27} />, value: lastEdited, label: 'Last Edited' },
+    ]
+
     return (
         <DashboardLayout>
-            <div className={styles.container}>
-                <div className={styles.headerWrapper}>
-                    <div>
-                        <h1 className={styles.headerTitle}>My Rersume</h1>
-                        <p className={styles.headerSubtitle}>
-                            {allResumes.length > 0 ? `You have ${allResumes.length} resumes${allResumes.length !== 1 ? 's' : ''}`
-                                : 'Start building your professional resume'}
-                        </p>
-                    </div>
-
-                    <div className=' flex gap-4'>
-                        <button className={styles.createButton}
-                            onClick={() => setOpencreateModal(true)}>
-                            <div className={styles.createButtonOverlay}></div>
-                            <span className={styles.createButtonContent}>
-                                Create Now
-                                <LucideFilePlus className=' group-hover:translate-x-1 transition-transform' size={18} />
-                            </span>
-                        </button>
-                    </div>
+            <section className='mb-10 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between'>
+                <div>
+                    <p className='mb-3 text-xs font-black uppercase tracking-[0.42em] text-[#40df8a] sm:text-sm'>Dashboard</p>
+                    <h1 className='text-4xl font-black tracking-tight text-white sm:text-5xl'>Welcome back, {displayName}</h1>
                 </div>
 
-                {/* loading State */}
-                {loading && (
-                    <div className={styles.spinnerWrapper}>
-                        <div className={styles.spinner}></div>
-                    </div>
-                )}
+                <button
+                    type='button'
+                    className='inline-flex h-14 w-full items-center justify-center gap-3 rounded-md bg-gradient-to-r from-[#68d987] to-[#f0c84d] px-8 text-base font-black text-[#07170f] transition-transform hover:-translate-y-0.5 sm:w-auto sm:min-w-[250px] sm:text-lg'
+                    onClick={() => setOpencreateModal(true)}
+                >
+                    <FilePlus2 size={22} />
+                    New Resume
+                </button>
+            </section>
 
-                {/* Empty state */}
-                {!loading && allResumes.length === 0 && (
-                    <div className={styles.emptyStateWrapper}>
-                        <div className={styles.emptyIconWrapper}>
-                            <LucideFilePlus size={32} className=' text-violet-600' />
+            <section className='mb-8 grid gap-5 md:grid-cols-3'>
+                {statCards.map(({ icon, value, label }) => (
+                    <div key={label} className='flex min-h-[118px] items-center gap-5 rounded-xl border border-white/10 bg-white/[0.035] px-7 py-6'>
+                        <div className='flex h-14 w-14 shrink-0 items-center justify-center rounded-md bg-[#153826] text-[#40df8a]'>
+                            {icon}
                         </div>
-
-                        <h3 className={styles.emptyTitle}>No Resumes Yet</h3>
-                        <p className={styles.emptyText}>
-                            You haven't created any resumes yet. Start building your professional resume to land your
-                            dream job.
-                        </p>
-
-                        <button className={styles.createButton} onClick={() => setOpencreateModal(true)}>
-                            <div className={styles.createButtonOverlay}>
-                            </div>
-                            <span className={styles.createButtonContent}>
-                                Create Your First Resume
-                                <LucideFilePlus className=' group-hover:translate-x-1 transition-transform' size={20} />
-                            </span>
-                        </button>
-                    </div>
-                )}
-
-                {/* Grid View */}
-                {!loading && allResumes.length > 0 && (
-                    <div className={styles.grid}>
-                        <div className={styles.newResumeCard} onClick={() => setOpencreateModal(true)}>
-                            <div className={styles.newResumeIcon}>
-                                <LucideFilePlus size={32} className=' text-white' />
-                            </div>
-                            <h3 className={styles.newResumeTitle}>Create New Resume</h3>
-                            <p className={styles.newResumeText}>Start building your career</p>
+                        <div>
+                            <div className='text-3xl font-black leading-none text-white'>{value}</div>
+                            <div className='mt-3 text-sm font-semibold uppercase tracking-[0.12em] text-slate-400'>{label}</div>
                         </div>
+                    </div>
+                ))}
+            </section>
 
-                        {allResumes.map((resume) => (
-                            <ResumeSummaryCard key={resume._id} imgUrl={resume.thumbnailLink}
+            {loading && (
+                <div className='flex min-h-[420px] items-center justify-center rounded-xl border border-dashed border-white/10 bg-white/[0.02]'>
+                    <div className='h-12 w-12 animate-spin rounded-full border-2 border-[#40df8a] border-t-transparent'></div>
+                </div>
+            )}
+
+            {!loading && allResumes.length === 0 && (
+                <section className='flex min-h-[540px] flex-col items-center justify-center rounded-xl border border-dashed border-white/10 bg-[#07170f]/70 px-6 py-14 text-center shadow-[inset_0_0_80px_rgba(64,223,138,0.03)] sm:min-h-[650px]'>
+                    <div className='mb-9 flex h-[106px] w-[106px] items-center justify-center rounded-2xl bg-gradient-to-br from-[#70d987] to-[#f0c84d] text-[#07170f] shadow-[0_0_60px_rgba(64,223,138,0.14)]'>
+                        <FilePlus2 size={48} strokeWidth={2.5} />
+                    </div>
+
+                    <h2 className='mb-6 text-3xl font-black text-white'>No resumes yet</h2>
+                    <p className='mb-10 max-w-[590px] text-lg font-medium leading-relaxed text-slate-400'>
+                        Create your first resume and start landing interviews. It only takes a few minutes.
+                    </p>
+
+                    <button
+                        type='button'
+                        className='inline-flex h-14 w-full max-w-[385px] items-center justify-center gap-3 rounded-md bg-gradient-to-r from-[#68d987] to-[#f0c84d] px-6 text-base font-black text-[#07170f] transition-transform hover:-translate-y-0.5 sm:text-lg'
+                        onClick={() => setOpencreateModal(true)}
+                    >
+                        <FilePlus2 size={22} />
+                        Create Your First Resume
+                    </button>
+
+                    <Link to='/' className='mt-9 text-lg font-semibold text-slate-500 transition-colors hover:text-slate-300'>
+                        &larr; Back to home
+                    </Link>
+                </section>
+            )}
+
+            {!loading && allResumes.length > 0 && (
+                <section className='grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3'>
+                    <button
+                        type='button'
+                        className='flex min-h-[380px] flex-col items-center justify-center rounded-xl border border-dashed border-white/15 bg-white/[0.025] p-6 text-center transition-colors hover:border-[#40df8a]/60 hover:bg-white/[0.04]'
+                        onClick={() => setOpencreateModal(true)}
+                    >
+                        <div className='mb-6 flex h-20 w-20 items-center justify-center rounded-xl bg-gradient-to-br from-[#70d987] to-[#f0c84d] text-[#07170f]'>
+                            <Plus size={36} />
+                        </div>
+                        <h3 className='text-xl font-black text-white'>Create New Resume</h3>
+                        <p className='mt-2 text-sm font-medium text-slate-400'>Start building your career</p>
+                    </button>
+
+                    {allResumes.map((resume) => (
+                        <ResumeSummaryCard key={resume._id} imgUrl={resume.thumbnailLink}
                             title={resume.title} createdAt={resume.createdAt} updatedAt={resume.updatedAt}
                             onSelect={() => navigate(`/resume/${resume._id}`)}
                             onDelete={() => handledDeleteClick(resume._id)}
                             completion={resume.completion || 0}
-                            isPremium = {resume.isPremium}
-                            isNew = {moment().diff(moment(resume.createdAt), 'days') < 7}  
-                            />
-                        ))}
-                    </div>
-                )}
-            </div>
+                            isPremium={resume.isPremium}
+                            isNew={moment().diff(moment(resume.createdAt), 'days') < 7}
+                        />
+                    ))}
+                </section>
+            )}
 
-            {/* Create Modal */}
-            <Modal isOpen={openCreateModal} onClose={() => setOpencreateModal(false)}
-            hideHeader >
-                <div className=' p-6'>
+            <Modal isOpen={openCreateModal} onClose={() => setOpencreateModal(false)} hideHeader>
+                <div className='p-6'>
                     <div className={styles.modalHeader}>
                         <h3 className={styles.modalTitle}>Create New Resume</h3>
 
                         <button onClick={() => setOpencreateModal(false)} className={styles.modalCloseButton}>
-                           X 
+                            X
                         </button>
                     </div>
                     <CreateResumeForm onSuccess={() => {
@@ -242,20 +257,19 @@ const Dashboard = () => {
                 </div>
             </Modal>
 
-            {/* Delte Modal */}
             <Modal isOpen={showDeleteConfirm} onClose={() => setShowDeleteConfirm(false)} title='Confirm Deletion'
-            showActionBtn actionBtnText='Delete' actionBtnClassName = 'bg-red-600 hover:bg-red-700'
-            onActionClick={handleDeleteresume}>
+                showActionBtn actionBtnText='Delete' actionBtnClassName='bg-red-600 hover:bg-red-700'
+                onActionClick={handleDeleteresume}>
 
-                <div className=' p-4'>
-                    <div className=' flex flex-col items-center text-center'>
+                <div className='p-4'>
+                    <div className='flex flex-col items-center text-center'>
                         <div className={styles.deleteIconWrapper}>
-                            <LucideTrash2 className=" text-orange-600" size={24} /> 
+                            <Trash2 className='text-orange-600' size={24} />
                         </div>
 
                         <h3 className={styles.deleteTitle}>Delete resume?</h3>
                         <p className={styles.deleteText}>
-                            Are you sure you want ot delete this resume? This action cannot be undone.
+                            Are you sure you want to delete this resume? This action cannot be undone.
                         </p>
                     </div>
                 </div>
@@ -265,3 +279,5 @@ const Dashboard = () => {
 }
 
 export default Dashboard
+
+

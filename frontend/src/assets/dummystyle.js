@@ -198,23 +198,23 @@ export const cardStyles = {
   logoutButton: "text-violet-600 text-[10px] sm:text-xs font-bold cursor-pointer hover:text-fuchsia-600 transition-colors",
 
   // ResumeSummaryCard styles
-  resumeCard: "group relative h-[360px] sm:h-[380px] lg:h-[400px] flex flex-col bg-white border border-gray-200 rounded-3xl overflow-hidden cursor-pointer transition-all duration-500 hover:scale-[1.02] hover:shadow-xl hover:border-violet-300",
+  resumeCard: "group relative h-[360px] sm:h-[380px] lg:h-[400px] flex flex-col bg-[#0d2016] border border-white/10 rounded-xl overflow-hidden cursor-pointer transition-all duration-500 hover:-translate-y-1 hover:border-[#40df8a]/50 hover:shadow-2xl hover:shadow-green-950/30",
   cardBackground: "absolute inset-0 bg-gradient-to-br from-violet-100 via-transparent to-fuchsia-100 opacity-0 group-hover:opacity-100 transition-opacity duration-500",
   previewArea: "p-4 sm:p-6 flex-1 relative overflow-hidden",
   emptyPreview: "w-full h-[180px] sm:h-[200px] lg:h-[220px] flex flex-col items-center justify-center rounded-2xl",
-  emptyPreviewIcon: "w-16 h-16 bg-white/90 rounded-2xl flex items-center justify-center mb-4 shadow-md",
-  emptyPreviewText: "text-gray-800 text-sm font-bold",
-  emptyPreviewSubtext: "text-gray-500 text-xs mt-1",
-  infoArea: "bg-gray-50 border-t border-gray-200 p-4 sm:p-6",
-  title: "text-sm sm:text-base font-bold text-gray-800 truncate mb-2 group-hover:text-violet-600 transition-colors",
-  dateInfo: "flex items-center gap-2 text-xs text-gray-500",
+  emptyPreviewIcon: "w-16 h-16 bg-gradient-to-br from-[#70d987] to-[#f0c84d] rounded-xl flex items-center justify-center mb-4 shadow-md",
+  emptyPreviewText: "text-[#07170f] text-sm font-bold",
+  emptyPreviewSubtext: "text-slate-700 text-xs mt-1",
+  infoArea: "bg-[#0a1a12] border-t border-white/10 p-4 sm:p-6",
+  title: "text-sm sm:text-base font-bold text-white truncate mb-2 group-hover:text-[#40df8a] transition-colors",
+  dateInfo: "flex flex-wrap items-center gap-2 text-xs text-slate-400",
 
   // Action buttons
-  actionOverlay: "absolute inset-4 sm:inset-6 bg-gradient-to-t from-white/80 via-white/20 to-transparent flex items-end justify-center p-6 opacity-0 group-hover:opacity-100 transition-all duration-300 rounded-2xl",
+  actionOverlay: "absolute inset-4 sm:inset-6 bg-gradient-to-t from-[#07170f]/85 via-[#07170f]/30 to-transparent flex items-end justify-center p-6 opacity-0 group-hover:opacity-100 transition-all duration-300 rounded-xl",
   actionButtonsContainer: "flex gap-3",
-  editButton: "group/btn w-12 h-12 flex items-center justify-center bg-gradient-to-r from-violet-600 to-fuchsia-600 rounded-2xl shadow-md hover:scale-110 transition-all duration-300",
-  deleteButton: "group/btn w-12 h-12 flex items-center justify-center bg-gradient-to-r from-orange-500 to-red-500 rounded-2xl shadow-md hover:scale-110 transition-all duration-300",
-  buttonIcon: "text-white group-hover/btn:scale-110 transition-transform",
+  editButton: "group/btn w-12 h-12 flex items-center justify-center bg-gradient-to-r from-[#68d987] to-[#f0c84d] rounded-xl shadow-md hover:scale-110 transition-all duration-300",
+  deleteButton: "group/btn w-12 h-12 flex items-center justify-center bg-gradient-to-r from-red-500 to-rose-600 rounded-xl shadow-md hover:scale-110 transition-all duration-300",
+  buttonIcon: "text-[#07170f] group-hover/btn:scale-110 transition-transform",
 
   // Progress and completion styles
   progressBar: "relative w-full h-2 bg-gray-200 rounded-full overflow-hidden",
@@ -222,14 +222,14 @@ export const cardStyles = {
   progressGlow: "absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent animate-pulse",
   progressIndicator: "absolute top-0 h-full w-4 bg-gradient-to-r from-transparent to-white/50 blur-sm transition-all duration-700",
   completionStatus: "flex justify-between items-center mt-2",
-  statusText: "text-xs font-medium text-gray-500",
-  percentageText: "text-xs font-bold text-gray-700",
+  statusText: "text-xs font-medium text-slate-400",
+  percentageText: "text-xs font-bold text-slate-200",
 
   // Completion indicator
-  completionIndicator: "absolute top-4 right-4 z-10 flex items-center gap-2 px-3 py-2 bg-gray-50 border border-gray-200 rounded-full shadow-sm",
+  completionIndicator: "absolute top-4 right-4 z-10 flex items-center gap-2 px-3 py-2 bg-[#07170f]/90 border border-white/10 rounded-full shadow-sm",
   completionDot: "w-3 h-3 rounded-full flex items-center justify-center",
   completionDotInner: "w-1 h-1 bg-white rounded-full",
-  completionPercentageText: "text-xs font-bold text-gray-700",
+  completionPercentageText: "text-xs font-bold text-slate-100",
 
   // Completion color classes
   completionHigh: "from-emerald-500 to-green-600",
