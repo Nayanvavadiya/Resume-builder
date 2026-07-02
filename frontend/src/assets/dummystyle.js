@@ -191,11 +191,11 @@ export const dashboardStyles = {
 
 export const cardStyles = {
   // ProfileInfoCard styles
-  profileCard: "flex items-center gap-3 p-2 sm:p-3 bg-white backdrop-blur-xl border border-gray-200 rounded-2xl shadow-md hover:shadow-lg transition-all duration-300 hover:scale-[1.03]",
-  profileInitialsContainer: "w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-violet-500 to-fuchsia-500 rounded-2xl flex items-center justify-center shadow-md",
-  profileInitialsText: "text-base sm:text-lg font-black text-white",
-  profileName: "text-xs sm:text-sm font-bold text-gray-800",
-  logoutButton: "text-violet-600 text-[10px] sm:text-xs font-bold cursor-pointer hover:text-fuchsia-600 transition-colors",
+  profileCard: "inline-flex h-[54px] min-w-[96px] items-center gap-3 rounded-md border border-white/10 bg-[#0b1f15] px-4 text-left transition-colors hover:border-[#2d875e] hover:bg-[#10281b]",
+  profileInitialsContainer: "flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#74dc83] to-[#f0c84d] shadow-sm",
+  profileInitialsText: "text-sm font-black text-[#07170f]",
+  profileName: "max-w-[90px] truncate text-base font-black text-slate-200",
+  logoutButton: "hidden",
 
   // ResumeSummaryCard styles
   resumeCard: "group relative h-[360px] sm:h-[380px] lg:h-[400px] flex flex-col bg-[#0d2016] border border-white/10 rounded-xl overflow-hidden cursor-pointer transition-all duration-500 hover:-translate-y-1 hover:border-[#40df8a]/50 hover:shadow-2xl hover:shadow-green-950/30",
@@ -512,3 +512,4 @@ export const infoStyles = {
   workDuration: color => `text-sm font-bold italic`,
   workDesc: "text-sm text-gray-600 font-medium leading-relaxed"
 };
+

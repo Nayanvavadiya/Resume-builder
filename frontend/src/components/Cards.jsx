@@ -10,33 +10,26 @@ import { ExternalLink, Github, Check } from 'lucide-react'
 // Profile Info cards 
 export const ProfileInfoCard = () => {
     const navigate = useNavigate()
-    const { user, clearUser } = useContext(UserContext)
+    const { user } = useContext(UserContext)
 
-    const handleLogout = () => {
-        localStorage.clear();
-        clearUser();
-        navigate('/')
-    }
+    if (!user) return null
+
+    const userName = user.name || ''
+    const initial = userName.charAt(0).toUpperCase()
 
     return (
-        user && (
-            <div className={cardStyles.profileCard}>
-                <div className={cardStyles.profileInitialsContainer}>
-                    <span className={cardStyles.profileInitialsText}>
-                        {user.name ? user.name.charAt(0).toUpperCase() : ""}
-                    </span>
-                </div>
+        <button
+            type="button"
+            className={cardStyles.profileCard}
+            onClick={() => navigate('/dashboard')}
+            aria-label="Open dashboard"
+        >
+            <span className={cardStyles.profileInitialsContainer}>
+                <span className={cardStyles.profileInitialsText}>{initial}</span>
+            </span>
 
-                <div >
-                    <div className={cardStyles.profileName}>
-                        {user.name || ""}
-                    </div>
-                    <button className={cardStyles.logoutButton} onClick={handleLogout}>
-                        Logout
-                    </button>
-                </div>
-            </div>
-        )
+            <span className={cardStyles.profileName}>{userName}</span>
+        </button>
     )
 }
 
@@ -251,3 +244,4 @@ export const TemplateCard = ({ thumbnailImg, isSelected, onSelect }) => {
         </div>
     )
 }
+
