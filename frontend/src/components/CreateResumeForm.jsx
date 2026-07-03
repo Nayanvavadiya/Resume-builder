@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import axiosInstance from '../utils/axiosInstance'
 import { API_PATHS } from '../utils/apiPaths'
 
-const CreateResumeForm = () => {
+const CreateResumeForm = ({ selectedTemplateId = '01' }) => {
 
   const [title, setTitle] = useState("")
   const [error, setError] = useState(null)
@@ -21,6 +21,10 @@ const CreateResumeForm = () => {
     try {
       const response = await axiosInstance.post(API_PATHS.RESUME.CREATE, {
         title,
+        template: {
+          theme: selectedTemplateId,
+          colorPalette: []
+        }
       })
       if (response.data?._id) {
         navigate(`/resume/${response.data?._id}`)

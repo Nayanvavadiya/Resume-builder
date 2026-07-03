@@ -36,6 +36,7 @@ const App = () => {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/templates" element={<ProtectedRoute><TemplatesPage /></ProtectedRoute>} />
+        <Route path="/template" element={<ProtectedRoute><TemplatesPage /></ProtectedRoute>} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path='/resume/:resumeId' element={<EditResume />} />
       </Routes>
@@ -53,3 +54,5 @@ const App = () => {
 }
 
 export default App
+
+

@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { ArrowLeft, FilePlus2, LayoutTemplate } from 'lucide-react'
 import { Link, useNavigate } from 'react-router-dom'
 import DashboardLayout from '../components/DashboardLayout'
 import { resumeTemplates } from '../utils/data'
+import Modal from '../components/Modal'
+import CreateResumeForm from '../components/CreateResumeForm'
 
 const templateNames = {
   '01': 'Modern Professional',
@@ -12,6 +14,13 @@ const templateNames = {
 
 const TemplatesPage = () => {
   const navigate = useNavigate()
+  const [selectedTemplateId, setSelectedTemplateId] = useState('01')
+  const [openCreateModal, setOpenCreateModal] = useState(false)
+
+  const handleTemplateClick = (templateId) => {
+    setSelectedTemplateId(templateId)
+    setOpenCreateModal(true)
+  }
 
   return (
     <DashboardLayout>
@@ -40,9 +49,11 @@ const TemplatesPage = () => {
 
       <section className="grid grid-cols-1 gap-6 md:grid-cols-3">
         {resumeTemplates.map((template) => (
-          <article
+          <button
             key={template.id}
-            className="overflow-hidden rounded-xl border border-white/10 bg-[#0d2016] transition-transform hover:-translate-y-1 hover:border-[#40df8a]/50"
+            type="button"
+            className="overflow-hidden rounded-xl border border-white/10 bg-[#0d2016] text-left transition-transform hover:-translate-y-1 hover:border-[#40df8a]/50 focus:outline-none focus:ring-2 focus:ring-[#40df8a] focus:ring-offset-2 focus:ring-offset-[#07170f]"
+            onClick={() => handleTemplateClick(template.id)}
           >
             <div className="bg-white p-3">
               <img
@@ -61,9 +72,15 @@ const TemplatesPage = () => {
                 <LayoutTemplate size={21} />
               </div>
             </div>
-          </article>
+          </button>
         ))}
       </section>
+
+      <Modal isOpen={openCreateModal} onClose={() => setOpenCreateModal(false)} hideHeader>
+        <div className="p-6">
+          <CreateResumeForm selectedTemplateId={selectedTemplateId} />
+        </div>
+      </Modal>
     </DashboardLayout>
   )
 }
