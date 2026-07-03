@@ -88,7 +88,7 @@ const LandingPage = () => {
                   Start Building
                   <ArrowRight size={18} />
                 </button>
-                <button className={landingPageStyles.secondaryButton} onClick={handleCTA}>
+                <button className={landingPageStyles.secondaryButton} onClick={() => navigate('/templates')}>
                   View Templates
                 </button>
               </div>
@@ -228,3 +228,4 @@ const LandingPage = () => {
 }
 
 export default LandingPage
+

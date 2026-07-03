@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react'
 import { ArrowUpRight, Check, Eye, EyeOff, LayoutTemplate } from 'lucide-react'
 import { UserContext } from '../context/UserContext'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import axiosInstance from '../utils/axiosInstance'
 import { API_PATHS } from '../utils/apiPaths'
 import { validateEmail } from '../utils/helper'
@@ -15,6 +15,8 @@ const LoginPage = () => {
 
   const { updateUser } = useContext(UserContext)
   const navigate = useNavigate()
+  const location = useLocation()
+  const redirectPath = location.state?.from?.pathname || '/dashboard'
 
   const handleLogin = async (e) => {
     e.preventDefault()
@@ -37,7 +39,7 @@ const LoginPage = () => {
       if (token) {
         localStorage.setItem('token', token)
         updateUser(response.data)
-        navigate('/dashboard')
+        navigate(redirectPath, { replace: true })
       }
     } catch (err) {
       setError(err.response?.data?.message || 'Something went wrong. Please try again.')
@@ -369,3 +371,4 @@ const LoginPage = () => {
 }
 
 export default LoginPage
+
