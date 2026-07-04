@@ -8,6 +8,7 @@ import axiosInstance from '../utils/axiosInstance'
 import { API_PATHS } from '../utils/apiPaths'
 import toast from 'react-hot-toast'
 import { fixTailwindColors } from '../utils/color'
+import { dataURLtoFile } from '../utils/helper'
 
 import html2pdf from 'html2pdf.js'
 import StepProgress from './StepProgress'

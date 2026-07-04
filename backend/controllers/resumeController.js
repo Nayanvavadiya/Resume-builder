@@ -158,10 +158,10 @@ export const deleteResume = async (req, res) => {
         const uploadsFolder = path.join(process.cwd(), 'uploads')
 
         //Delete thumbnalfunction
-        if (resume.thumbnilLink) {
+        if (resume.thumbnailLink) {
             const oldThumbnail = path.join(
                 uploadsFolder,
-                path.basename(resume.thumbnilLink)
+                path.basename(resume.thumbnailLink)
             );
             if (fs.existsSync(oldThumbnail)) {
                 fs.unlinkSync(oldThumbnail);

@@ -29,13 +29,13 @@ export const uploadResumeImages = async (req, res) => {
                 const newProfileImage = req.files.profileImage?.[0];
 
                 if (newThumbnail) {
-                    if (resume.thumbnilLink) {
-                        const oldThumbnail = path.join(uploadsFolder, path.basename(resume.thumbnilLink))
+                    if (resume.thumbnailLink) {
+                        const oldThumbnail = path.join(uploadsFolder, path.basename(resume.thumbnailLink))
                         if (fs.existsSync(oldThumbnail))
                             fs.unlinkSync(oldThumbnail)
                     }
                     if (newThumbnail) {
-                        resume.thumbnilLink = `${baseUrl}/uploads/${newThumbnail.filename}`
+                        resume.thumbnailLink = `${baseUrl}/uploads/${newThumbnail.filename}`
                     }
 
                 }
@@ -53,7 +53,7 @@ export const uploadResumeImages = async (req, res) => {
                 await resume.save();
                 res.status(200).json({
                     message: "Image upload successfully",
-                    thumbnilLink: resume.thumbnilLink,
+                    thumbnailLink: resume.thumbnailLink,
                     profilePreviewUrl: resume.profileInfo.profilePreviewUrl
                 })
             })
