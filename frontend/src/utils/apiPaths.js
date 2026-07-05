@@ -1,4 +1,4 @@
-export const BASE_URL = 'https://nynresumebuilderbackend.vercel.app/';
+export const BASE_URL = 'https://nynresumebuilderbackend.vercel.app/' || 'http://localhost:4000';
 
 //Routes used for frontend
 export const API_PATHS = {
