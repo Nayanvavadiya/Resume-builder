@@ -75,11 +75,49 @@ Resumint is a modern, full-stack resume builder that helps you design a standout
 
 ---
 
-## 📂 Project Structure
-Resume-builder/
-├── backend/          # API & server logic
-├── frontend/         # React client app
+## 📁 Project Structure
+
+```text
+.
+├── backend/
+│   ├── config/              # Database configuration
+│   │   └── db.js
+│   ├── controllers/         # Business logic
+│   │   ├── resumeController.js
+│   │   ├── uploadImages.js
+│   │   └── userController.js
+│   ├── middleware/          # Custom middleware
+│   ├── models/              # Mongoose models
+│   ├── routes/              # API routes
+│   │   ├── resumeRoutes.js
+│   │   └── userRoutes.js
+│   ├── uploads/             # Uploaded images
+│   ├── .env
+│   ├── .gitignore
+│   ├── package.json
+│   ├── package-lock.json
+│   └── server.js            # Backend entry point
+│
+├── frontend/
+│   ├── public/
+│   ├── src/
+│   │   ├── assets/          # Images & static assets
+│   │   ├── components/      # Reusable React components
+│   │   ├── context/         # React Context API
+│   │   ├── pages/           # Application pages
+│   │   ├── utils/           # Helper functions & API utilities
+│   │   ├── App.jsx
+│   │   ├── index.css
+│   │   └── main.jsx         # Frontend entry point
+│   ├── .gitignore
+│   ├── eslint.config.js
+│   ├── index.html
+│   ├── package.json
+│   ├── package-lock.json
+│   └── vite.config.js
+│
 └── README.md
+```
 
 ---
 
