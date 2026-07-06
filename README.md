@@ -78,7 +78,7 @@ Resumint is a modern, full-stack resume builder that helps you design a standout
 ## 📁 Project Structure
 
 ```text
-.
+RESUME_BUILDER
 ├── backend/
 │   ├── config/              # Database configuration
 │   │   └── db.js
