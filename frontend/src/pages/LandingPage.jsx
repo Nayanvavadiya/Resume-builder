@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react'
 import { ArrowRight, LayoutTemplate, Menu, X, Zap, Download, ShieldCheck, Star } from 'lucide-react'
 import { landingPageStyles } from '../assets/dummystyle'
 import { UserContext } from '../context/UserContext'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { ProfileInfoCard } from '../components/Cards'
 
 const LandingPage = () => {
@@ -32,7 +32,7 @@ const LandingPage = () => {
 
           <nav className={landingPageStyles.navLinks}>
             <a href="#features" className={landingPageStyles.navLink}>Features</a>
-            <a href="#templates" className={landingPageStyles.navLink}>Templates</a>
+            <Link to="/templates" className={landingPageStyles.navLink}>Templates</Link>
             <a href="#pricing" className={landingPageStyles.navLink}>Pricing</a>
           </nav>
 
@@ -55,7 +55,7 @@ const LandingPage = () => {
           <div className={landingPageStyles.mobileMenu}>
             <div className={landingPageStyles.mobileMenuContainer}>
               <a href="#features" className={landingPageStyles.mobileMenuLink} onClick={() => setMobileMenuOpen(false)}>Features</a>
-              <a href="#templates" className={landingPageStyles.mobileMenuLink} onClick={() => setMobileMenuOpen(false)}>Templates</a>
+              <Link to="/templates" className={landingPageStyles.mobileMenuLink} onClick={() => setMobileMenuOpen(false)}>Templates</Link>
               <a href="#pricing" className={landingPageStyles.mobileMenuLink} onClick={() => setMobileMenuOpen(false)}>Pricing</a>
               {user ? (
                 <button className={landingPageStyles.mobileDashboardButton} onClick={() => { navigate('/dashboard'); setMobileMenuOpen(false) }}>
@@ -145,7 +145,7 @@ const LandingPage = () => {
         <section id="features" className={landingPageStyles.featuresSection}>
           <div className={landingPageStyles.featuresContainer}>
             <div className={landingPageStyles.featuresHeader}>
-              <h2 className={landingPageStyles.sectionIntro}>Built to make you <br/><span className={landingPageStyles.featuresTitle}>unmissable.</span></h2>
+              <h2 className={landingPageStyles.sectionIntro}>Built to make you <br /><span className={landingPageStyles.featuresTitle}>unmissable.</span></h2>
               <p className={landingPageStyles.featuresDescription}>Everything you need to create a resume that stands out from the stack.</p>
             </div>
 
